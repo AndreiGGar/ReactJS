@@ -4,6 +4,7 @@ import SumNumbers from './components/SumNumbers';
 import Son from './components/Son';
 import Maths from './components/Maths';
 import Counter from './components/Counter';
+import Car from './components/Car';
 
 function App() {
   const exeParent = (desc) => {
@@ -16,6 +17,8 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+        <Car Brand="BMW" Model="Hybrid" Gears="6" Color="Black" Speed="180" Acceleration="20"/>
+        <Car Brand="Lamborghini" Model="Diesel" Gears="5" Color="White" Speed="240" Acceleration="30"/>
         <img src={messiImg} className="img" alt="img" style={{width: "600px", height: "450px"}}/>
         <SumNumbers number1="1" number2="2"/>
         <Son idSon="1" exeParent={exeParent}/>
