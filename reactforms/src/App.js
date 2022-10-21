@@ -1,15 +1,15 @@
 import logo from './logo.svg';
 import './App.css';
-import Home from './components/Home';
-import Music from './components/Music';
-import Cinema from './components/Cinema';
+import Forms from './components/Forms';
+import Collatz from './components/Collatz';
+import Multiplication from './components/Multiplication';
 
 function App() {
   return (
     <div>
-      <Home/>
-      <Music/>
-      <Cinema/>
+      <Multiplication/>
+      {/* <Collatz/> */}
+      {/* <Forms/> */}
     </div>
   );
 }
