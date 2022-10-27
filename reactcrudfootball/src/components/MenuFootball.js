@@ -2,35 +2,44 @@ import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import Global from "../Global";
 import axios from "axios";
+import Uefa from "../assets/images/uefa.png";
 
 export default class MenuDepts extends Component {
   state = {
     statusGet: false,
-    depts: [],
+    teams: [],
   };
 
-  loadDepts = () => {
-    var request = "api/departamentos";
-    var url = Global.urlDepts + request;
+  loadTeams = () => {
+    var request = "api/Equipos";
+    var url = Global.urlApi + request;
     axios.get(url).then((response) => {
       this.setState({
-        depts: response.data,
+        teams: response.data,
         statusGet: true,
       });
     });
   };
 
   componentDidMount = () => {
-    this.loadDepts();
+    this.loadTeams();
   };
 
   render() {
     return (
       <div>
-        <nav className="navbar navbar-expand-lg bg-primary">
+        <nav
+          className="navbar navbar-expand-lg"
+          style={{ backgroundColor: "lightgray" }}
+        >
           <div className="container-fluid">
-            <NavLink className="navbar-brand text-white" to="/">
-              CRUD
+            <NavLink className="navbar-brand" to="/">
+              <img
+                src={Uefa}
+                alt="Uefa"
+                style={{ width: "50px", height: "50px" }}
+              />
+              Champions League
             </NavLink>
             <button
               className="navbar-toggler"
@@ -58,30 +67,30 @@ export default class MenuDepts extends Component {
                   </NavLink>
                 </li>
                 <li className="nav-item">
-                  <NavLink className="nav-link text-danger" to="/create">
-                    Create Dept
+                  <NavLink className="nav-link text-danger" to="/bets">
+                    Bets
                   </NavLink>
                 </li>
                 <li className="nav-item dropdown">
                   <a
-                    className="nav-link dropdown-toggle"
+                    className="nav-link dropdown-toggle text-white"
                     href="#"
                     role="button"
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                   >
-                    Depts
+                    Teams
                   </a>
 
                   <ul className="dropdown-menu">
-                    {this.state.depts.map((dept, index) => {
+                    {this.state.teams.map((team, index) => {
                       return (
-                        <li key={dept.numero}>
+                        <li key={team.idEquipo}>
                           <NavLink
-                            to={"/employers/" + dept.numero}
+                            to={"/teams/" + team.idEquipo}
                             className="dropdown-item"
                           >
-                            {dept.nombre}
+                            {team.nombre}
                           </NavLink>
                         </li>
                       );

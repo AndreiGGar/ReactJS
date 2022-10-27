@@ -5,15 +5,14 @@ import { Navigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 export default class CreateDepts extends Component {
-
   boxNameRef = React.createRef();
   boxLocationRef = React.createRef();
 
   state = {
-    status: false,
+    statusUpd: false,
     statusGet: false,
-    depts: []
-  }
+    depts: [],
+  };
 
   loadDepts = () => {
     var request = "api/departamentos/" + this.props.number;
@@ -54,7 +53,7 @@ export default class CreateDepts extends Component {
         title: "Success!",
       });
       this.setState({
-        status: true,
+        statusUpd: true,
       });
     });
   };
@@ -71,37 +70,39 @@ export default class CreateDepts extends Component {
   // }
 
   render() {
-    if (this.state.status == true) {
+    if (this.state.statusUpd == true) {
       return <Navigate to="/" />;
     }
     return (
       <div>
         <h3>Update Dept</h3>
-        <form onSubmit={this.updateDept}>
-          <label>Name: </label>
-          <input
-            type="text"
-            className="form-control"
-            ref={this.boxNameRef}
-            value={this.state.depts.nombre}
-            name="name"
-            // onChange={this.changeInput}
-            required
-          ></input>
-          <br />
-          <label>Location: </label>
-          <input
-            type="text"
-            className="form-control"
-            ref={this.boxLocationRef}
-            value={this.state.depts.localidad}
-            name="location"
-            // onChange={this.changeInput}
-            required
-          ></input>
-          <br />
-          <button className="btn btn-danger">Update Dept</button>
-        </form>
+        {this.state.statusGet == true && (
+          <form onSubmit={this.updateDept}>
+            <label>Name: </label>
+            <input
+              type="text"
+              className="form-control"
+              ref={this.boxNameRef}
+              defaultValue={this.state.depts.nombre}
+              name="name"
+              // onChange={this.changeInput}
+              required
+            ></input>
+            <br />
+            <label>Location: </label>
+            <input
+              type="text"
+              className="form-control"
+              ref={this.boxLocationRef}
+              defaultValue={this.state.depts.localidad}
+              name="location"
+              // onChange={this.changeInput}
+              required
+            ></input>
+            <br />
+            <button className="btn btn-danger">Update Dept</button>
+          </form>
+        )}
         <br />
         <h2 style={{ color: "purple" }}>{this.state.message}</h2>
       </div>
